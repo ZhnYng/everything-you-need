@@ -27,6 +27,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # vercel
 .vercel
@@ -34,3 +35,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local db
+/db/pgdata
+
+# test pdf
+form-45--consent-to-act-as-director-and-statement-of-non-disqualification-to-act-as-director-version-2jan2021.pdf
