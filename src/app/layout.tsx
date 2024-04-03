@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Lato } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from '@clerk/nextjs'
 import { Toaster } from "react-hot-toast";
 import Providers from "@/components/Providers";
 
-const inter = Inter({ subsets: ["latin"] });
+const lato = Lato({ subsets: ["latin"], weight: ["100", "400", "700", "900"] });
 
 export const metadata: Metadata = {
   title: "Everything You Need",
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <Providers>
-        <html lang='en'>
+        <html lang='en' className={lato.className}>
           <body>
             <Toaster position="top-right" />
             {children}

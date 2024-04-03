@@ -4,15 +4,14 @@ import { getEmbeddings } from "./embedding";
 
 export async function getMatchesFromEmbeddings(
   embeddings: number[],
-  fileKey: string
 ) {
   try {
     const pc = new Pinecone({
       apiKey: process.env.PINECONE_API_KEY!
     });
     const pineconeIndex = pc.index("everything-you-need");
-    const namespace = pineconeIndex.namespace(convertToAscii(fileKey));
-    const queryResult = await namespace.query({
+    // const namespace = pineconeIndex.namespace(convertToAscii(fileKey));
+    const queryResult = await pineconeIndex.query({
       topK: 5,
       vector: embeddings,
       includeMetadata: true,
@@ -24,9 +23,9 @@ export async function getMatchesFromEmbeddings(
   }
 }
 
-export async function getContext(query: string, fileKey: string) {
+export async function getContext(query: string) {
   const queryEmbeddings = await getEmbeddings(query);
-  const matches = await getMatchesFromEmbeddings(queryEmbeddings, fileKey);
+  const matches = await getMatchesFromEmbeddings(queryEmbeddings);
 
   const qualifyingDocs = matches.filter(
     (match) => match.score && match.score > 0.7

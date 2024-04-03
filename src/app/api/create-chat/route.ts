@@ -6,30 +6,29 @@ import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request, res: Response) {
+  console.log("api called")
+  console.log(req)
   const { userId } = await auth();
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
-    const body = await req.json();
-    const { file_key, file_name } = body;
-    await loadDocumentIntoPinecone(file_key);
+    // const body = await req.json();
+    // const { file_key, file_name } = body;
+    // await loadDocumentIntoPinecone(file_key);
 
-    const url = await getDocumentUrl(file_key);
-    if(!url) {
-      return NextResponse.json(
-        { error: "Invalid file key" },
-        { status: 400 }
-      );
-    }
-    
+    // const url = await getDocumentUrl(file_key);
+    // if(!url) {
+    //   return NextResponse.json(
+    //     { error: "Invalid file key" },
+    //     { status: 400 }
+    //   );
+    // }
+
     const chatId = await db
       .insert(chats)
       .values({
-        fileKey: file_key,
-        pdfName: file_name,
-        pdfUrl: url,
         userId,
       })
       .returning({

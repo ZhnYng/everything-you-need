@@ -7,6 +7,7 @@ import { Send } from "lucide-react";
 import MessageList from "./MessageList";
 import { useQuery } from "@tanstack/react-query";
 import { Message } from "ai";
+import Image from "next/image";
 
 type Props = { chatId: number };
 
@@ -43,12 +44,15 @@ const ChatComponent = ({ chatId }: Props) => {
 
   return (
     <div
-      className="relative min-h-screen overflow-y-scroll"
+      className="relative min-h-screen overflow-y-scroll p-4 flex flex-col items-center"
       id="message-container"
     >
       {/* header */}
-      <div className="sticky top-0 inset-x-0 p-2 bg-white h-fit">
-        <h3 className="text-xl font-bold">Chat</h3>
+      <div className="sticky top-0 p-2 flex w-full items-center h-14">
+        <div className="w-10 h-10">
+          <Image src={"/logo_govtech_hort.gif"} alt="GovTech Logo" layout={'fill'} objectFit={'contain'} />
+        </div>
+        <h3 className="text-xl font-bold">Everything You Need</h3>
       </div>
 
       {/* message list */}
@@ -56,19 +60,20 @@ const ChatComponent = ({ chatId }: Props) => {
 
       <form
         onSubmit={handleSubmit}
-        className="sticky bottom-0 inset-x-0 px-2 py-4 bg-white"
+        className="absolute bottom-0 inset-x-0 px-2 py-4 bg-white"
       >
-        <div className="flex">
+        <div className="flex justify-center">
           <Input
             value={input}
             onChange={handleInputChange}
             placeholder="Ask any question..."
-            className="w-full"
+            className="w-full max-w-3xl h-12"
           />
-          <Button className="bg-blue-600 ml-2">
-            <Send className="h-4 w-4" />
+          <Button className="ml-2 h-12 w-16 hover:bg-purple-600 hover:text-white" variant={"outline"}>
+            <Send className="h-6 w-6" />
           </Button>
         </div>
+        <p className="text-center text-gray-400 my-3">Everything You Need contains context from the Singapore Government but may be manipulated into using context from elsewhere.</p>
       </form>
     </div>
   );
