@@ -4,9 +4,9 @@ import { DrizzleChat } from "@/lib/db/schema";
 import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
-import { MessageCircle, PlusCircle } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Input } from "./ui/input";
+import { useRouter } from 'next/navigation'
 
 type Props = {
   chats: DrizzleChat[];
@@ -15,15 +15,20 @@ type Props = {
 
 const ChatSideBar = ({ chats, chatId }: Props) => {
   const [title, setTitle] = React.useState('No title')
+  const router = useRouter()
 
   return (
     <div className="w-full min-h-screen overflow-y-scroll p-4 text-black">
-      <Link href="/">
-        <Button className="w-full border-dashed border-black border" variant={"outline"}>
-          <PlusCircle className="mr-2 w-4 h-4" />
-          New Chat
-        </Button>
-      </Link>
+      <Button className="w-full border-dashed border-black border" variant={"outline"} onClick={
+        async () => {
+          const response = await fetch('/api/create-chat', {method: "POST"})
+          const result = await response.json()
+          router.push(`/chat/${result.chat_id}`)
+        }
+      }>
+        <PlusCircle className="mr-2 w-4 h-4" />
+        New Chat
+      </Button>
 
       <div className="flex h-full pb-20 flex-col gap-2 mt-4">
         {chats.map((chat) => (
