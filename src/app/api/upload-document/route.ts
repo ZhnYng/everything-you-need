@@ -41,14 +41,14 @@ export async function GET(req: Request) {
     if (!fileKey) {
       return NextResponse.json(
         { error: "File key is missing" },
-        { status: 200 }
+        { status: 400 }
       );
     }
 
     const storage = new Storage();
     const url = storage.bucket("every-document").file(fileKey).publicUrl();
 
-    return NextResponse.json({ data: { url: url } }, { status: 200 });
+    return NextResponse.json({ url: url }, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(

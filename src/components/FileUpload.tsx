@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import { Button } from "./ui/button";
-import { useFormState } from "react-dom";
 import toast from 'react-hot-toast';
 import { useDropzone } from "react-dropzone";
 import { useMutation } from "@tanstack/react-query";
@@ -18,7 +16,7 @@ const FileUpload = () => {
   const router = useRouter();
   const [uploading, setUploading] = React.useState(false);
   
-  const {mutate} = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: async({
       file_key,
       file_name,
@@ -94,8 +92,7 @@ const FileUpload = () => {
         })}
       >
         <input {...getInputProps()} />
-        {/* {uploading || isLoading ? ( */}
-        {uploading ? (
+        {uploading || isPending ? (
           <>
             {/* loading state */}
             <Loader2 className="h-10 w-10 text-blue-500 animate-spin" />
