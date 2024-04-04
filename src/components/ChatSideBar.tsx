@@ -18,7 +18,7 @@ const ChatSideBar = ({ chats, chatId }: Props) => {
   const router = useRouter()
 
   return (
-    <div className="w-full min-h-screen overflow-y-scroll p-4 text-black">
+    <div className="w-full h-full overflow-y-scroll p-4 text-black">
       <Button className="w-full border-dashed border-black border" variant={"outline"} onClick={
         async () => {
           const response = await fetch('/api/create-chat', {method: "POST"})

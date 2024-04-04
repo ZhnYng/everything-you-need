@@ -37,8 +37,8 @@ export async function loadDocumentIntoPinecone(fileKey: string) {
 
   console.log('Uploading to pinecone')
   const index = pc.Index("everything-you-need")
-  const namespace = index.namespace(convertToAscii(fileKey));
-  await namespace.upsert(vectors)
+  // const namespace = index.namespace(convertToAscii(fileKey));
+  await index.upsert(vectors)
 }
 
 export const truncateStringByBytes = (str: string, bytes: number) => {

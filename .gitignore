@@ -39,5 +39,6 @@ next-env.d.ts
 # local db
 /db/pgdata
 
-# test pdf
+# test pdfs
 form-45--consent-to-act-as-director-and-statement-of-non-disqualification-to-act-as-director-version-2jan2021.pdf
+MROct23_SF_C.pdf

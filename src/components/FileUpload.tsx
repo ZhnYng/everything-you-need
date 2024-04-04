@@ -4,7 +4,6 @@ import React from "react";
 import toast from 'react-hot-toast';
 import { useDropzone } from "react-dropzone";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import { Inbox, Loader2 } from "lucide-react";
 
 const FileUpload = () => {
@@ -12,66 +11,40 @@ const FileUpload = () => {
     sentiment: "", 
     message: ""
   };
-  // const [state, dispatch] = useFormState(uploadDocument, initialState);
-  const router = useRouter();
   const [uploading, setUploading] = React.useState(false);
   
   const { mutate, isPending } = useMutation({
-    mutationFn: async({
-      file_key,
-      file_name,
-    }: {
-      file_key: string;
-      file_name: string;
-    }) => {
-      const response = await fetch("/api/create-chat", {
+    mutationFn: async(file: File) => {
+      const data = new FormData()
+      data.append('file', file)
+      
+      const response = await fetch("/api/upload-document", {
         method: "POST",
-        body: JSON.stringify({
-          file_key,
-          file_name
-        })
+        body: data,
       })
       return response.json()
     }
   })
-
-  const uploadDocument = async (file:File) => {
-    var data = new FormData()
-    data.append('file', file)
-
-    const response = await fetch("/api/upload-document", {
-      method: "POST",
-      body: data
-    })
-
-    return response.json()
-  }
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: { "application/pdf": [".pdf"] },
     maxFiles: 1,
     onDrop: async (acceptedFiles) => {
       const file = acceptedFiles[0];
+      // larger than 10mb
       if (file.size > 10 * 1024 * 1024) {
-        // bigger than 10mb!
         toast.error("File too large");
         return;
       }
 
       try {
         setUploading(true);
-        const data = await uploadDocument(file);
-        if (!data?.file_key || !data.file_name) {
-          toast.error("Something went wrong");
-          return;
-        }
-        mutate(data, {
-          onSuccess: ({ chat_id }) => {
-            toast.success("Chat created!");
-            router.push(`/chat/${chat_id}`);
+        mutate(file, {
+          onSuccess: ({ file_key }) => {
+            toast.success(`File uploaded as ${file_key}`);
           },
           onError: (err) => {
-            toast.error("Error creating chat");
+            toast.error("Error uploading file");
             console.error(err);
           },
         });
@@ -97,7 +70,7 @@ const FileUpload = () => {
             {/* loading state */}
             <Loader2 className="h-10 w-10 text-blue-500 animate-spin" />
             <p className="mt-2 text-sm text-slate-400">
-              Spilling Tea to GPT...
+              Uploading to Vector DB
             </p>
           </>
         ) : (

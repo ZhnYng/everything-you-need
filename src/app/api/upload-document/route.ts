@@ -1,3 +1,4 @@
+import { loadDocumentIntoPinecone } from "@/lib/pinecone";
 import { Storage } from "@google-cloud/storage";
 import { NextResponse } from "next/server";
 
@@ -17,10 +18,11 @@ export async function POST(req: Request, res: Response) {
       .file(fileKey)
       .save(Buffer.from(buffer));
 
+    await loadDocumentIntoPinecone(fileKey);
+
     return NextResponse.json(
       {
         file_key: fileKey,
-        file_name: file.name,
       },
       { status: 200 }
     );

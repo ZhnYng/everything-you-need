@@ -7,7 +7,6 @@ import { Send } from "lucide-react";
 import MessageList from "./MessageList";
 import { useQuery } from "@tanstack/react-query";
 import { Message } from "ai";
-import Image from "next/image";
 
 type Props = { chatId: number };
 
@@ -44,23 +43,19 @@ const ChatComponent = ({ chatId }: Props) => {
 
   return (
     <div
-      className="relative min-h-screen overflow-y-scroll p-4 flex flex-col items-center"
+      className="h-full overflow-y-scroll p-4 flex flex-col items-center"
       id="message-container"
     >
-      {/* header */}
-      <div className="sticky top-0 p-2 flex w-full items-center h-14">
-        <div className="w-10 h-10">
-          <Image src={"/logo_govtech_hort.gif"} alt="GovTech Logo" layout={'fill'} objectFit={'contain'} />
-        </div>
-        <h3 className="text-xl font-bold">Everything You Need</h3>
-      </div>
+      <h3 className="text-xl font-bold text-center sticky top-0">No Title</h3>
 
       {/* message list */}
-      <MessageList messages={messages} isLoading={isLoading} />
+      <div className="relative w-full h-full max-w-6xl">
+        <MessageList messages={messages} isLoading={isLoading} />
+      </div>
 
       <form
         onSubmit={handleSubmit}
-        className="absolute bottom-0 inset-x-0 px-2 py-4 bg-white"
+        className="sticky bottom-0 inset-x-0 px-2 py-4 bg-white w-full"
       >
         <div className="flex justify-center">
           <Input
