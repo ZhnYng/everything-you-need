@@ -22,7 +22,7 @@ export default function RootLayout({
     <ClerkProvider>
       <Providers>
         <html lang='en' className={lato.className}>
-          <body className="h-screen flex flex-col">
+          <body>
             <Toaster position="top-right" />
             <Navbar/>
             {children}

@@ -43,13 +43,13 @@ const ChatComponent = ({ chatId }: Props) => {
 
   return (
     <div
-      className="h-full overflow-y-scroll p-4 flex flex-col items-center"
+      className="p-4 flex flex-col items-center h-full"
       id="message-container"
     >
-      <h3 className="text-xl font-bold text-center sticky top-0">No Title</h3>
+      <h3 className="text-xl font-bold text-center sticky top-0 pb-4">No Title</h3>
 
       {/* message list */}
-      <div className="relative w-full h-full max-w-6xl">
+      <div className="w-full max-w-6xl h-full overflow-y-scroll">
         <MessageList messages={messages} isLoading={isLoading} />
       </div>
 

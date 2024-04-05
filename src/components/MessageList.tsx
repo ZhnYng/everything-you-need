@@ -11,7 +11,7 @@ type Props = {
 const MessageList = ({ messages, isLoading }: Props) => {
   if (isLoading) {
     return (
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="flex justify-center items-center">
         <Loader2 className="w-6 h-6 animate-spin" />
       </div>
     );
@@ -19,7 +19,7 @@ const MessageList = ({ messages, isLoading }: Props) => {
 
   return (
     messages.length > 0 ? 
-      <div className="flex flex-col gap-2 px-4 w-full mt-10">
+      <div className="flex flex-col gap-2 px-4 w-full mt-10 max-h-96">
         {messages.map((message) => {
           return (
             <div
@@ -53,7 +53,7 @@ const MessageList = ({ messages, isLoading }: Props) => {
         })}
       </div>
       :
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <div className="flex justify-center items-center flex-col h-full">
         <h2 className="text-2xl font-bold text-center mb-8">What would you like to find out today?</h2>
         <div className="grid grid-cols-2 grid-rows-2 gap-4">
           <div className="col-span-1 row-span-1">

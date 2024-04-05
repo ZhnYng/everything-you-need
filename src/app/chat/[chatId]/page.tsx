@@ -38,11 +38,11 @@ const ChatPage = async ({ params: { chatId } }: Props) => {
   }
 
   return (
-    <div className="flex w-full">
+    <div className="flex w-full pt-32 h-screen">
       <div className="flex-[1] max-w-xs">
         <ChatSideBar chats={_chats} chatId={parseInt(chatId)} />
       </div>
-      <div className="relative flex-[3] border-l-4 border-l-slate-200">
+      <div className="flex-[3] border-l-4 border-l-slate-200 h-full">
         <ChatComponent chatId={parseInt(chatId)} />
       </div>
     </div>
