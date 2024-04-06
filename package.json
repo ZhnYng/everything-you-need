@@ -22,6 +22,9 @@
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.30.6",
     "fs": "^0.0.1-security",
+    "html-to-text": "^9.0.5",
+    "jsdom": "^24.0.0",
+    "jspdf": "^2.5.1",
     "langchain": "^0.1.30",
     "lucide-react": "^0.363.0",
     "md5": "^2.3.0",
@@ -33,10 +36,14 @@
     "react-dom": "^18",
     "react-dropzone": "^14.2.3",
     "react-hot-toast": "^2.4.1",
+    "react-markdown": "^9.0.1",
+    "remark-gfm": "^4.0.0",
     "tailwind-merge": "^2.2.2",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/html-to-text": "^9.0.4",
     "@types/md5": "^2.3.5",
     "@types/node": "^20",
     "@types/pg": "^8.11.4",

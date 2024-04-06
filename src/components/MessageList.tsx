@@ -2,6 +2,8 @@ import { cn } from "@/lib/utils";
 import { Message } from "ai/react";
 import { Loader2, Upload, User } from "lucide-react";
 import React from "react";
+import Markdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 type Props = {
   isLoading: boolean;
@@ -41,7 +43,7 @@ const MessageList = ({ messages, isLoading }: Props) => {
                     }
                   )}
                 >
-                  <p>{message.content}</p>
+                  <p><Markdown remarkPlugins={[remarkGfm]}>{message.content}</Markdown></p>
                 </div>
                 <div className={cn("flex mt-2", {"justify-end": message.role === "user"})}>
                   <User/>

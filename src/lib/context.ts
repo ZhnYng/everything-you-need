@@ -10,7 +10,7 @@ export async function getMatchesFromEmbeddings(
       apiKey: process.env.PINECONE_API_KEY!
     });
     const pineconeIndex = pc.index("everything-you-need");
-    // const namespace = pineconeIndex.namespace(convertToAscii(fileKey));
+    // const namespace = pineconeIndex.namespace("uploads-1712387836674-MROct23_SF_C.pdf");
     const queryResult = await pineconeIndex.query({
       topK: 5,
       vector: embeddings,
@@ -34,9 +34,9 @@ export async function getContext(query: string) {
   type Metadata = {
     text: string;
     pageNumber: number;
+    source: string;
   };
 
-  let docs = qualifyingDocs.map((match) => (match.metadata as Metadata).text);
-  // 5 vectors
-  return docs.join("\n").substring(0, 3000);
+  let docs = qualifyingDocs.map((match) => (match.metadata as Metadata));
+  return docs
 }

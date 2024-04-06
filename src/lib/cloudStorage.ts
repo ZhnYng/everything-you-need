@@ -5,7 +5,7 @@ export async function downloadDocument(fileKey: string) {
   try {
     const storage = new Storage();
     const folder = '/tmp/'
-    const fileDestination = `/tmp/pdf-${Date.now()}.pdf`;
+    const fileDestination = `/tmp/${fileKey}`;
 
     if (!fs.existsSync(folder)){
       fs.mkdirSync(folder, {recursive: true});

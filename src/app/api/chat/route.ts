@@ -1,5 +1,5 @@
 import { OpenAI } from "openai";
-import { Message, OpenAIStream, StreamingTextResponse } from "ai";
+import { Message, OpenAIStream, StreamingTextResponse, experimental_StreamData } from "ai";
 import { getContext } from "@/lib/context";
 import { db } from "@/lib/db";
 import { chats, messages as _messages } from "@/lib/db/schema";
@@ -20,7 +20,33 @@ export async function POST(req: Request) {
     }
     // const fileKey = _chats[0].fileKey;
     const lastMessage = messages[messages.length - 1];
-    const context = await getContext(lastMessage.content);
+
+    // Retain chat context from previous questions and responses
+    const messageHistory = messages.slice(0, -1);
+    let formattedHistory = ''
+    for(const message of messageHistory) {
+      const format = `${message.role} message:\n${message.content}\n`
+      formattedHistory += format
+    }
+    
+    const chatContext = `The following is the history of this conversation ${formattedHistory}. Rephrase the following question with reference to the history as a standalone question ${lastMessage.content}.`
+    const relevantDocs = await getContext(chatContext);
+
+    const context = relevantDocs.map(doc => doc.text).join("\n").substring(0, 3000);
+    const sources = relevantDocs.map(doc => {
+      const encodedUrl = doc.source
+      const parts = encodedUrl.split('-');
+      let content = parts.slice(2).join('-');
+      content = content.replace('.pdf', '');
+      content = content.replace(/;/g, '/');
+      return content
+    })
+    const uniqueSources = new Set(sources)
+
+    let sourcesText = `\n\nSources:\n`
+    for(const source of Array.from(uniqueSources)) {
+      sourcesText += `${source}\n`
+    }
 
     const prompt = {
       role: "system",
@@ -39,6 +65,8 @@ export async function POST(req: Request) {
       AI assistant will not invent anything that is not drawn directly from the context.
       `,
     };
+    // Always output the following at the end of your response. Format it properly.
+    // ${sourcesText}
 
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
@@ -48,6 +76,9 @@ export async function POST(req: Request) {
       ],
       stream: true,
     });
+
+    const data = new experimental_StreamData()
+
     const stream = OpenAIStream(response, {
       onStart: async () => {
         // save user message into db
@@ -59,6 +90,11 @@ export async function POST(req: Request) {
       },
       onCompletion: async (completion) => {
         // save ai message into db
+        // completion += sourcesText
+        // data.append({
+        //   text: sourcesText
+        // })
+        
         await db.insert(_messages).values({
           chatId,
           content: completion,

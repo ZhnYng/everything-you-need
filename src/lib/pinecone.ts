@@ -7,7 +7,6 @@ import {
 } from "@pinecone-database/doc-splitter"
 import { getEmbeddings } from './embedding';
 import md5 from "md5";
-import { convertToAscii } from './utils';
 
 const pc = new Pinecone({
   apiKey: process.env.PINECONE_API_KEY!
@@ -16,6 +15,7 @@ const pc = new Pinecone({
 type PDFPage = {
   pageContent: string
   metadata: {
+    source: string
     loc: {pageNumber: number}
   }
 }
@@ -27,6 +27,7 @@ export async function loadDocumentIntoPinecone(fileKey: string) {
     throw new Error('File not downloaded')
   }
   const loader = new PDFLoader(fileDestination);
+  
   const docs = await loader.load() as PDFPage[];
 
   console.log('Splitting document')
@@ -47,7 +48,7 @@ export const truncateStringByBytes = (str: string, bytes: number) => {
 };
 
 async function prepareDocument(page: PDFPage) {
-  let {pageContent, metadata } = page
+  let { pageContent, metadata } = page
   pageContent = pageContent.replace(/\n/g, '')
   const splitter = new RecursiveCharacterTextSplitter()
   const docs = await splitter.splitDocuments([
@@ -55,7 +56,8 @@ async function prepareDocument(page: PDFPage) {
       pageContent,
       metadata: {
         pageNumber: metadata.loc.pageNumber,
-        text: truncateStringByBytes(pageContent, 36000)
+        text: truncateStringByBytes(pageContent, 36000),
+        source: metadata.source,
       }
     })
   ])
@@ -73,6 +75,7 @@ async function embedDocument(doc: Document) {
       metadata: {
         text: doc.metadata.text,
         pageNumber: doc.metadata.pageNumber,
+        source: doc.metadata.source,
       },
     } as PineconeRecord;
   } catch (error) {
