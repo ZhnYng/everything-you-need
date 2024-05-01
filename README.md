@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# **Everything you need**
+==========================
 
-## Getting Started
+**Imagine having all the information you need at your fingertips...**
 
-First, run the development server:
+Everything you need is a revolutionary AI-powered tool that helps you quickly find accurate answers from your documents. With our advanced Retrieval Augmented Generation (RAG) technology, you can:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+• Get precise answers to your questions based on the content of your documents
+• Save time searching through multiple documents
+• Focus on making informed decisions instead of digging through information
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**How it works**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Provide your documents and questions, and our tool will use RAG to extract relevant information and provide a comprehensive answer.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+**Features**
+----------
 
-## Learn More
+* **Contextual Answering**: Get precise answers to your questions based on the content of the documents you provide.
+* **Multi-Document Support**: Supply multiple documents, and the tool will extract relevant information from each to provide a comprehensive answer.
+* **Advanced Retrieval**: Leverage the power of RAG to retrieve information from various document types, including PDFs and more.
+* **Accurate Contextualization**: The tool understands the context of your questions and provides answers that take into account the nuances of the documents you've provided.
 
-To learn more about Next.js, take a look at the following resources:
+**Screenshots**
+----------
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![Screenshot 1](demo/home-page.png)
+Screenshot of the tool's home page
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+![Screenshot 2](demo/chat-page.png)
+Screenshot of the chat page
 
-## Deploy on Vercel
+![Screenshot 3](demo/upload-docs-page.png)
+Screenshot of the page to upload documents
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Author**
+----------
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+* Lim Zhen Yang
+
+**Tech Stack**
+---------------
+
+* We acknowledge the use of the following technologies:
+	+ NextJS
+	+ Dizzle
+	+ TailwindCSS
+	+ PostgreSQL
+	+ OpenAI ChatGPT
+	+ Pinecone
+	+ Langchain
