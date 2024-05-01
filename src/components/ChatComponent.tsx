@@ -68,7 +68,7 @@ const ChatComponent = ({ chatId }: Props) => {
             <Send className="h-6 w-6" />
           </Button>
         </div>
-        <p className="text-center text-gray-400 my-3">Everything You Need contains context from the Singapore Government but may be manipulated into using context from elsewhere.</p>
+        <p className="text-center text-gray-400 my-3">Everything You Need may not always be factually accurate.</p>
       </form>
     </div>
   );
