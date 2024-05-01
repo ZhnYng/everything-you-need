@@ -13,6 +13,11 @@ Everything you need is a revolutionary AI-powered tool that helps you quickly fi
 
 Provide your documents and questions, and our tool will use RAG to extract relevant information and provide a comprehensive answer.
 
+**Try it out**
+------------
+
+Visit our site at https://everything-you-need.vercel.app/ to try out the tool for yourself!
+
 **Features**
 ----------
 
@@ -40,12 +45,10 @@ Screenshot of the page to upload documents
 
 **Tech Stack**
 ---------------
-
-* We acknowledge the use of the following technologies:
-	+ NextJS
-	+ Dizzle
-	+ TailwindCSS
-	+ PostgreSQL
-	+ OpenAI ChatGPT
-	+ Pinecone
-	+ Langchain
++ NextJS
++ Dizzle
++ TailwindCSS
++ PostgreSQL
++ OpenAI ChatGPT
++ Pinecone
++ Langchain
