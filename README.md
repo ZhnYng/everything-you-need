@@ -29,14 +29,17 @@ Visit our site at https://everything-you-need.vercel.app/ to try out the tool fo
 **Screenshots**
 ----------
 
-![Screenshot 1](demo/home-page.png)
-Screenshot of the tool's home page
+![Screenshot 1](demo/home.png)
+Screenshot of the home page
 
-![Screenshot 2](demo/chat-page.png)
-Screenshot of the chat page
+![Screenshot 2](demo/campaigns.png)
+Screenshot of the campaigns
 
-![Screenshot 3](demo/upload-docs-page.png)
-Screenshot of the page to upload documents
+![Screenshot 2](demo/edit-campaign.png)
+Screenshot of the edit campaign
+
+![Screenshot 3](demo/dashboard.png)
+Screenshot of the dashboard
 
 **Author**
 ----------
